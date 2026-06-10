@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Home() {
   return (
     <div className="flex flex-col w-full bg-white">
@@ -15,17 +17,26 @@ export default function Home() {
                 <a href="#features" className="text-gray-700 hover:text-amber-700 px-3 py-2 rounded-md text-sm font-medium">
                   Features
                 </a>
-                <a href="#marketplace" className="text-gray-700 hover:text-amber-700 px-3 py-2 rounded-md text-sm font-medium">
+                <Link href="/products" className="text-gray-700 hover:text-amber-700 px-3 py-2 rounded-md text-sm font-medium">
                   Marketplace
-                </a>
+                </Link>
+                <Link href="/sellers" className="text-gray-700 hover:text-amber-700 px-3 py-2 rounded-md text-sm font-medium">
+                  Sellers
+                </Link>
+                <Link href="/about" className="text-gray-700 hover:text-amber-700 px-3 py-2 rounded-md text-sm font-medium">
+                  About
+                </Link>
                 <a href="#contact" className="text-gray-700 hover:text-amber-700 px-3 py-2 rounded-md text-sm font-medium">
                   Contact
                 </a>
               </div>
             </div>
-            <button className="inline-flex items-center justify-center px-4 py-2 rounded-lg bg-amber-700 text-white font-medium hover:bg-amber-800 transition-colors">
-              Get Started
-            </button>
+            <div className="flex gap-2">
+              <Link href="/auth/signin" className="px-4 py-2 text-gray-700 hover:text-amber-700 font-medium">Sign In</Link>
+              <Link href="/auth/signup" className="inline-flex items-center justify-center px-4 py-2 rounded-lg bg-amber-700 text-white font-medium hover:bg-amber-800 transition-colors">
+                Get Started
+              </Link>
+            </div>
           </div>
         </div>
       </nav>
@@ -43,12 +54,12 @@ export default function Home() {
                   Connect with talented artisans and crafters from around the world. Support local creators, discover unique handmade products, and celebrate the beauty of craftsmanship.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <button className="inline-flex items-center justify-center px-8 py-3 rounded-lg bg-amber-700 text-white font-medium hover:bg-amber-800 transition-colors">
+                  <Link href="/products" className="inline-flex items-center justify-center px-8 py-3 rounded-lg bg-amber-700 text-white font-medium hover:bg-amber-800 transition-colors">
                     Explore Marketplace
-                  </button>
-                  <button className="inline-flex items-center justify-center px-8 py-3 rounded-lg border-2 border-amber-700 text-amber-700 font-medium hover:bg-amber-50 transition-colors">
+                  </Link>
+                  <Link href="/auth/signup" className="inline-flex items-center justify-center px-8 py-3 rounded-lg border-2 border-amber-700 text-amber-700 font-medium hover:bg-amber-50 transition-colors">
                     Become a Seller
-                  </button>
+                  </Link>
                 </div>
               </div>
               <div className="relative h-96 bg-gradient-to-br from-amber-200 to-orange-300 rounded-2xl shadow-lg flex items-center justify-center">
@@ -140,6 +151,167 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Testimonials Section */}
+        <section className="py-20 sm:py-32 bg-gray-50">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h3 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+                Loved by Artisans & Collectors
+              </h3>
+              <p className="text-lg text-gray-600">
+                Hear from our community members
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="bg-white p-8 rounded-lg shadow-md">
+                <div className="flex items-center mb-4">
+                  <span className="text-2xl">⭐⭐⭐⭐⭐</span>
+                </div>
+                <p className="text-gray-700 mb-4">
+                  "Handcrafted Haven has transformed my small pottery business into a thriving online operation. The platform is intuitive and the community is incredibly supportive!"
+                </p>
+                <p className="font-bold text-gray-900">Sarah Chen</p>
+                <p className="text-sm text-gray-600">Ceramic Artist</p>
+              </div>
+
+              <div className="bg-white p-8 rounded-lg shadow-md">
+                <div className="flex items-center mb-4">
+                  <span className="text-2xl">⭐⭐⭐⭐⭐</span>
+                </div>
+                <p className="text-gray-700 mb-4">
+                  "I've found the most amazing handcrafted pieces here. Every item tells a story and supports real artisans. I'm hooked!"
+                </p>
+                <p className="font-bold text-gray-900">Marcus Rodriguez</p>
+                <p className="text-sm text-gray-600">Collector & Customer</p>
+              </div>
+
+              <div className="bg-white p-8 rounded-lg shadow-md">
+                <div className="flex items-center mb-4">
+                  <span className="text-2xl">⭐⭐⭐⭐⭐</span>
+                </div>
+                <p className="text-gray-700 mb-4">
+                  "As a woodworker, this platform perfectly showcases my craftsmanship. The tools and support provided make running my business a joy."
+                </p>
+                <p className="font-bold text-gray-900">James Thompson</p>
+                <p className="text-sm text-gray-600">Wood Craftsman</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Statistics Section */}
+        <section className="py-20 sm:py-32 bg-white">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+              <div className="text-center">
+                <p className="text-4xl font-bold text-amber-700 mb-2">2,500+</p>
+                <p className="text-gray-600">Artisans</p>
+              </div>
+              <div className="text-center">
+                <p className="text-4xl font-bold text-amber-700 mb-2">15,000+</p>
+                <p className="text-gray-600">Products</p>
+              </div>
+              <div className="text-center">
+                <p className="text-4xl font-bold text-amber-700 mb-2">50,000+</p>
+                <p className="text-gray-600">Happy Customers</p>
+              </div>
+              <div className="text-center">
+                <p className="text-4xl font-bold text-amber-700 mb-2">$5M+</p>
+                <p className="text-gray-600">Artist Revenue</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Featured Products Section */}
+        <section className="py-20 sm:py-32 bg-gray-50">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h3 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+                Featured Treasures
+              </h3>
+              <p className="text-lg text-gray-600">
+                Discover some of our most popular handcrafted items
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+              {[
+                { emoji: '🏺', name: 'Ceramic Vase', price: '$89.99', seller: 'Clay Artistry' },
+                { emoji: '🪵', name: 'Wooden Cutting Board', price: '$54.99', seller: 'Wood Crafters' },
+                { emoji: '🧶', name: 'Wool Blanket', price: '$129.99', seller: 'Cozy Creations' },
+                { emoji: '📔', name: 'Leather Journal', price: '$34.99', seller: 'Leather Works' },
+              ].map((product, i) => (
+                <div key={i} className="bg-white rounded-lg shadow hover:shadow-lg transition-shadow overflow-hidden">
+                  <div className="aspect-square bg-gradient-to-br from-amber-100 to-orange-100 flex items-center justify-center text-6xl">
+                    {product.emoji}
+                  </div>
+                  <div className="p-4">
+                    <h4 className="font-bold text-gray-900 mb-2">{product.name}</h4>
+                    <p className="text-sm text-gray-600 mb-3">{product.seller}</p>
+                    <p className="text-lg font-bold text-amber-700 mb-4">{product.price}</p>
+                    <Link href="/products" className="w-full block text-center bg-amber-700 text-white py-2 rounded-lg font-medium hover:bg-amber-800 transition-colors">
+                      View
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="text-center mt-12">
+              <Link href="/products" className="inline-flex items-center justify-center px-8 py-3 rounded-lg bg-amber-700 text-white font-medium hover:bg-amber-800 transition-colors">
+                View All Products
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* How It Works Section */}
+        <section className="py-20 sm:py-32 bg-white">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h3 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+                How It Works
+              </h3>
+              <p className="text-lg text-gray-600">
+                Simple steps to get started
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+              <div className="text-center">
+                <div className="w-16 h-16 mx-auto bg-amber-100 rounded-full flex items-center justify-center mb-4">
+                  <span className="text-2xl">1</span>
+                </div>
+                <h4 className="font-bold text-gray-900 mb-2">Create Account</h4>
+                <p className="text-gray-600">Sign up and set up your profile in minutes</p>
+              </div>
+              <div className="text-center">
+                <div className="w-16 h-16 mx-auto bg-amber-100 rounded-full flex items-center justify-center mb-4">
+                  <span className="text-2xl">2</span>
+                </div>
+                <h4 className="font-bold text-gray-900 mb-2">Browse Products</h4>
+                <p className="text-gray-600">Explore thousands of unique handcrafted items</p>
+              </div>
+              <div className="text-center">
+                <div className="w-16 h-16 mx-auto bg-amber-100 rounded-full flex items-center justify-center mb-4">
+                  <span className="text-2xl">3</span>
+                </div>
+                <h4 className="font-bold text-gray-900 mb-2">Secure Checkout</h4>
+                <p className="text-gray-600">Safe payment processing with buyer protection</p>
+              </div>
+              <div className="text-center">
+                <div className="w-16 h-16 mx-auto bg-amber-100 rounded-full flex items-center justify-center mb-4">
+                  <span className="text-2xl">4</span>
+                </div>
+                <h4 className="font-bold text-gray-900 mb-2">Enjoy & Share</h4>
+                <p className="text-gray-600">Receive your treasure and share your joy</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* CTA Section */}
         <section id="marketplace" className="py-20 sm:py-32 bg-gradient-to-r from-amber-700 to-orange-600">
           <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
@@ -150,12 +322,12 @@ export default function Home() {
               Whether you're a buyer seeking unique treasures or an artisan wanting to share your craft with the world, Handcrafted Haven is your destination.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="inline-flex items-center justify-center px-8 py-3 rounded-lg bg-white text-amber-700 font-medium hover:bg-amber-50 transition-colors">
+              <Link href="/products" className="inline-flex items-center justify-center px-8 py-3 rounded-lg bg-white text-amber-700 font-medium hover:bg-amber-50 transition-colors">
                 Browse Products
-              </button>
-              <button className="inline-flex items-center justify-center px-8 py-3 rounded-lg border-2 border-white text-white font-medium hover:bg-white/10 transition-colors">
+              </Link>
+              <Link href="/auth/signup" className="inline-flex items-center justify-center px-8 py-3 rounded-lg border-2 border-white text-white font-medium hover:bg-white/10 transition-colors">
                 Sell Your Craft
-              </button>
+              </Link>
             </div>
           </div>
         </section>

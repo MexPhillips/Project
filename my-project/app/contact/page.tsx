@@ -101,74 +101,129 @@ export default function Contact() {
               </button>
 
               {submitted && (
-                <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
-                  <p className="text-green-800">Thank you! Your message has been sent successfully.</p>
+                <div className="p-4 bg-green-50 border border-green-200 rounded-lg text-green-800">
+                  ✓ Thank you! Your message has been sent. We'll get back to you soon.
                 </div>
               )}
             </form>
           </div>
 
-          {/* Contact Info */}
-          <div className="space-y-8">
-            <div>
-              <h3 className="text-lg font-bold text-gray-900 mb-3">📧 Email</h3>
-              <p className="text-gray-600">
-                <a href="mailto:hello@handcraftedhaven.com" className="text-amber-700 hover:text-amber-800">
-                  hello@handcraftedhaven.com
-                </a>
-              </p>
-            </div>
+          {/* Contact Information */}
+          <div>
+            <div className="bg-gray-50 p-8 rounded-lg">
+              <h3 className="text-xl font-bold text-gray-900 mb-6">Contact Information</h3>
+              
+              <div className="space-y-6">
+                <div>
+                  <h4 className="font-bold text-gray-900 mb-2">📧 Email</h4>
+                  <p className="text-gray-600">
+                    <a href="mailto:support@handcrafted-haven.com" className="text-amber-700 hover:text-amber-800">
+                      support@handcrafted-haven.com
+                    </a>
+                  </p>
+                </div>
 
-            <div>
-              <h3 className="text-lg font-bold text-gray-900 mb-3">📞 Phone</h3>
-              <p className="text-gray-600">
-                <a href="tel:+1-555-0123" className="text-amber-700 hover:text-amber-800">
-                  +1 (555) 0123
-                </a>
-              </p>
-            </div>
+                <div>
+                  <h4 className="font-bold text-gray-900 mb-2">📞 Phone</h4>
+                  <p className="text-gray-600">+1 (555) 123-4567</p>
+                </div>
 
-            <div>
-              <h3 className="text-lg font-bold text-gray-900 mb-3">🕐 Hours</h3>
-              <div className="text-gray-600 space-y-1">
-                <p>Monday - Friday: 9am - 6pm</p>
-                <p>Saturday: 10am - 4pm</p>
-                <p>Sunday: Closed</p>
+                <div>
+                  <h4 className="font-bold text-gray-900 mb-2">📍 Address</h4>
+                  <p className="text-gray-600">
+                    123 Artisan Street<br/>
+                    Portland, OR 97201<br/>
+                    USA
+                  </p>
+                </div>
+
+                <div>
+                  <h4 className="font-bold text-gray-900 mb-2">🕒 Business Hours</h4>
+                  <p className="text-gray-600">
+                    Monday - Friday: 9am - 6pm<br/>
+                    Saturday: 10am - 4pm<br/>
+                    Sunday: Closed
+                  </p>
+                </div>
+
+                <div className="pt-6 border-t border-gray-200">
+                  <h4 className="font-bold text-gray-900 mb-4">Follow Us</h4>
+                  <div className="flex gap-4">
+                    <a href="#" className="text-amber-700 hover:text-amber-800 text-2xl">f</a>
+                    <a href="#" className="text-amber-700 hover:text-amber-800 text-2xl">𝕏</a>
+                    <a href="#" className="text-amber-700 hover:text-amber-800 text-2xl">📷</a>
+                    <a href="#" className="text-amber-700 hover:text-amber-800 text-2xl">📌</a>
+                  </div>
+                </div>
               </div>
-            </div>
-
-            <div className="bg-gray-50 p-6 rounded-lg">
-              <h3 className="text-lg font-bold text-gray-900 mb-3">📍 Location</h3>
-              <p className="text-gray-600">
-                123 Craft Street<br />
-                Artisan City, AC 12345<br />
-                United States
-              </p>
             </div>
           </div>
         </div>
 
         {/* FAQ Section */}
-        <div className="mt-16 pt-16 border-t border-gray-200">
+        <section className="mt-20 pt-12 border-t border-gray-200">
           <h2 className="text-3xl font-bold text-gray-900 mb-8">Frequently Asked Questions</h2>
-          <div className="space-y-6">
-            <div className="border border-gray-200 rounded-lg p-6">
-              <h3 className="text-lg font-bold text-gray-900 mb-2">How long does shipping take?</h3>
-              <p className="text-gray-600">Most orders ship within 3-5 business days. Delivery times vary based on location, typically 7-14 days.</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+              <h3 className="font-bold text-gray-900 mb-2">❓ How do I place an order?</h3>
+              <p className="text-gray-600 text-sm">Simply browse the marketplace, select your desired product, and follow the secure checkout process. We support multiple payment methods.</p>
             </div>
-            <div className="border border-gray-200 rounded-lg p-6">
-              <h3 className="text-lg font-bold text-gray-900 mb-2">What is your return policy?</h3>
-              <p className="text-gray-600">We offer a 30-day return policy for all items in original condition. Contact us for details.</p>
+            <div>
+              <h3 className="font-bold text-gray-900 mb-2">❓ What's the return policy?</h3>
+              <p className="text-gray-600 text-sm">We offer a 30-day return policy for most items. Check with the individual seller for specific terms and conditions.</p>
             </div>
-            <div className="border border-gray-200 rounded-lg p-6">
-              <h3 className="text-lg font-bold text-gray-900 mb-2">How can I become a seller?</h3>
-              <p className="text-gray-600">
-                Visit our <Link href="/auth/signup" className="text-amber-700 hover:text-amber-800">signup page</Link> and follow the seller registration process.
+            <div>
+              <h3 className="font-bold text-gray-900 mb-2">❓ How long does shipping take?</h3>
+              <p className="text-gray-600 text-sm">Shipping times vary by seller and location. Average domestic shipping is 5-10 business days.</p>
+            </div>
+            <div>
+              <h3 className="font-bold text-gray-900 mb-2">❓ How do I become a seller?</h3>
+              <p className="text-gray-600 text-sm">
+                <Link href="/auth/signup" className="text-amber-700 hover:text-amber-800 font-medium">Sign up for an account</Link> and follow our simple seller onboarding process.
               </p>
             </div>
           </div>
-        </div>
+        </section>
       </main>
+
+      {/* Footer */}
+      <footer className="bg-gray-900 text-gray-300 py-12 mt-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+            <div>
+              <h4 className="text-white font-bold mb-4">Handcrafted Haven</h4>
+              <p className="text-sm">Supporting artisans and celebrating handmade craftsmanship worldwide.</p>
+            </div>
+            <div>
+              <h4 className="text-white font-bold mb-4">Browse</h4>
+              <ul className="space-y-2 text-sm">
+                <li><Link href="/products" className="hover:text-white transition-colors">Marketplace</Link></li>
+                <li><Link href="/sellers" className="hover:text-white transition-colors">Artisans</Link></li>
+                <li><a href="#" className="hover:text-white transition-colors">Collections</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-white font-bold mb-4">Sell</h4>
+              <ul className="space-y-2 text-sm">
+                <li><Link href="/auth/signup" className="hover:text-white transition-colors">Become a Seller</Link></li>
+                <li><a href="#" className="hover:text-white transition-colors">Seller Resources</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Pricing</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-white font-bold mb-4">Support</h4>
+              <ul className="space-y-2 text-sm">
+                <li><a href="#" className="hover:text-white transition-colors">Help Center</a></li>
+                <li><Link href="/contact" className="hover:text-white transition-colors">Contact Us</Link></li>
+                <li><Link href="/about" className="hover:text-white transition-colors">About Us</Link></li>
+              </ul>
+            </div>
+          </div>
+          <div className="border-t border-gray-800 pt-8 text-center text-sm">
+            <p>&copy; 2024 Handcrafted Haven. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
