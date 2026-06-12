@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@prisma/client':
+        specifier: ^7.8.0
+        version: 7.8.0(prisma@7.8.0(@types/react@19.2.17)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@6.0.3))(typescript@6.0.3)
       next:
         specifier: ^16.2.9
         version: 16.2.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -18,9 +21,6 @@ importers:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
     devDependencies:
-      '@prisma/client':
-        specifier: ^7.8.0
-        version: 7.8.0(prisma@7.8.0(@types/react@19.2.17)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@6.0.3))(typescript@6.0.3)
       '@supabase/supabase-js':
         specifier: ^2.108.1
         version: 2.108.1
@@ -36,6 +36,9 @@ importers:
       autoprefixer:
         specifier: ^10.5.0
         version: 10.5.0(postcss@8.5.15)
+      dotenv:
+        specifier: ^17.4.2
+        version: 17.4.2
       postcss:
         specifier: ^8.5.15
         version: 8.5.15
