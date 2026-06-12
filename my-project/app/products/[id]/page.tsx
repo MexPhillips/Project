@@ -1,136 +1,118 @@
-'use client';
-
 import Link from "next/link";
+import { notFound } from "next/navigation";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import { getProductById, PRODUCTS } from "@/lib/data";
 
-const PRODUCTS: Record<number, any> = {
-  1: { name: "Handmade Ceramic Vase", price: 89.99, image: "🏺", seller: "Clay Artistry", sellerId: 1, category: "Home Décor", rating: 4.8, reviews: 24, description: "Beautiful ceramic vase hand-thrown and glazed. Perfect for flowers or as a standalone decorative piece.", inStock: true },
-  2: { name: "Wooden Cutting Board", price: 54.99, image: "🪵", seller: "Wood Crafters", sellerId: 2, category: "Kitchen", rating: 4.9, reviews: 18, description: "Premium hardwood cutting board made from sustainably sourced materials. Food-safe and durable.", inStock: true },
-  3: { name: "Leather Journal", price: 34.99, image: "📔", seller: "Leather Works", sellerId: 3, category: "Stationery", rating: 4.7, reviews: 42, description: "Genuine leather journal with handstitched binding. Perfect for writers and travelers.", inStock: true },
-  4: { name: "Knitted Wool Blanket", price: 129.99, image: "🧶", seller: "Cozy Creations", sellerId: 4, category: "Home Décor", rating: 5.0, reviews: 15, description: "Cozy wool blanket hand-knitted with natural fibers. Warm and luxuriously soft.", inStock: false },
-  5: { name: "Hand-Painted Mug", price: 24.99, image: "☕", seller: "Painted Pottery", sellerId: 5, category: "Kitchen", rating: 4.6, reviews: 31, description: "Unique ceramic mug with hand-painted design. Each one is one-of-a-kind.", inStock: true },
-  6: { name: "Macramé Wall Hanging", price: 64.99, image: "🪡", seller: "Fiber Arts", sellerId: 1, category: "Home Décor", rating: 4.8, reviews: 12, description: "Beautiful macramé wall hanging made from natural cotton cord. Bohemian style décor.", inStock: true },
-  7: { name: "Handmade Soap Set", price: 39.99, image: "🧼", seller: "Natural Beauty", sellerId: 6, category: "Personal Care", rating: 4.9, reviews: 67, description: "Set of 5 artisan soaps made from organic ingredients. Gentle on skin, eco-friendly packaging.", inStock: true },
-  8: { name: "Wooden Jewelry Box", price: 79.99, image: "💎", seller: "Wood Crafters", sellerId: 2, category: "Accessories", rating: 4.7, reviews: 9, description: "Hand-carved wooden jewelry box with velvet lining. Perfect gift for jewelry lovers.", inStock: true },
-};
+export default async function ProductDetail({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const product = getProductById(parseInt(id));
+  if (!product) notFound();
 
-export default function ProductDetail({ params }: { params: { id: string } }) {
-  const product = PRODUCTS[parseInt(params.id)];
-
-  if (!product) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">Product Not Found</h1>
-          <Link href="/products" className="text-amber-700 hover:text-amber-800">
-            Back to Marketplace
-          </Link>
-        </div>
-      </div>
-    );
-  }
+  const related = PRODUCTS.filter((p) => p.category === product.category && p.id !== product.id).slice(0, 4);
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Header */}
-      <header className="sticky top-0 z-40 bg-white border-b border-gray-200">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <Link href="/" className="text-2xl font-bold text-amber-800">
-              🎨 Handcrafted Haven
-            </Link>
-            <nav className="hidden md:flex gap-8">
-              <Link href="/" className="text-gray-700 hover:text-amber-700">Home</Link>
-              <Link href="/products" className="text-gray-700 hover:text-amber-700">Marketplace</Link>
-              <Link href="/sellers" className="text-gray-700 hover:text-amber-700">Sellers</Link>
-              <Link href="/about" className="text-gray-700 hover:text-amber-700">About</Link>
-              <Link href="/contact" className="text-gray-700 hover:text-amber-700">Contact</Link>
-            </nav>
-          </div>
-        </div>
-      </header>
-
+      <Header active="products" />
       <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
-        <Link href="/products" className="text-amber-700 hover:text-amber-800 mb-6 inline-block">
-          ← Back to Marketplace
-        </Link>
+        <Link href="/products" className="text-amber-700 hover:text-amber-800 mb-6 inline-block">← Back to Marketplace</Link>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Product Image */}
           <div className="aspect-square bg-gradient-to-br from-amber-50 to-orange-50 rounded-lg flex items-center justify-center text-9xl">
             {product.image}
           </div>
 
-          {/* Product Info */}
           <div>
+            <p className="text-sm text-amber-700 font-medium mb-2">{product.category}</p>
             <h1 className="text-4xl font-bold text-gray-900 mb-4">{product.name}</h1>
-            
+
             <div className="flex items-center gap-4 mb-6">
-              <div className="flex items-center gap-2">
-                <span className="text-2xl text-yellow-500">⭐ {product.rating}</span>
-                <span className="text-gray-600">({product.reviews} reviews)</span>
-              </div>
+              <span className="text-2xl text-yellow-500">⭐ {product.rating}</span>
+              <span className="text-gray-600">({product.reviews} reviews)</span>
             </div>
 
             <div className="bg-gray-50 p-6 rounded-lg mb-6">
-              <div className="flex items-baseline gap-2 mb-4">
-                <span className="text-4xl font-bold text-amber-700">${product.price}</span>
-              </div>
-              <p className="text-gray-600 mb-4">{product.description}</p>
-              <div className="mb-4">
-                <p className="text-sm font-medium text-gray-700">Availability:</p>
-                <p className={product.inStock ? "text-green-600 font-semibold" : "text-red-600 font-semibold"}>
-                  {product.inStock ? "In Stock" : "Out of Stock"}
-                </p>
-              </div>
+              <span className="text-4xl font-bold text-amber-700">${product.price}</span>
+              <p className="text-gray-600 mt-4">{product.description}</p>
+              <p className="text-gray-600 mt-2">{product.longDescription}</p>
+              <p className={`mt-4 font-semibold ${product.stock ? "text-green-600" : "text-red-600"}`}>
+                {product.stock ? "✓ In Stock" : "Out of Stock"}
+              </p>
             </div>
 
-            {/* Seller Info */}
-            <div className="border-t border-gray-200 pt-6 mb-6">
-              <p className="text-sm text-gray-600 mb-3">By</p>
-              <Link href={`/sellers/${product.sellerId}`}>
-                <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer">
-                  <div className="text-4xl">👤</div>
-                  <div>
-                    <p className="font-bold text-gray-900">{product.seller}</p>
-                    <p className="text-sm text-gray-600">View seller profile</p>
-                  </div>
+            {product.materials.length > 0 && (
+              <div className="mb-6">
+                <h3 className="font-bold text-gray-900 mb-2">Materials</h3>
+                <div className="flex flex-wrap gap-2">
+                  {product.materials.map((m) => (
+                    <span key={m} className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">{m}</span>
+                  ))}
                 </div>
-              </Link>
+              </div>
+            )}
+
+            {product.dimensions && (
+              <p className="text-gray-600 mb-2"><strong>Dimensions:</strong> {product.dimensions}</p>
+            )}
+            {product.careInstructions && (
+              <p className="text-gray-600 mb-6"><strong>Care:</strong> {product.careInstructions}</p>
+            )}
+
+            <Link href={`/sellers/${product.sellerId}`}>
+              <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors mb-6">
+                <div className="text-4xl">👤</div>
+                <div>
+                  <p className="font-bold text-gray-900">{product.seller}</p>
+                  <p className="text-sm text-gray-600">View seller profile →</p>
+                </div>
+              </div>
+            </Link>
+
+            <div className="flex gap-4 mb-8">
+              <button className={`flex-1 py-3 rounded-lg font-medium transition-colors ${product.stock ? "bg-amber-700 text-white hover:bg-amber-800" : "bg-gray-400 text-white cursor-not-allowed"}`}>
+                {product.stock ? "Add to Cart" : "Sold Out"}
+              </button>
+              <button className="flex-1 border-2 border-amber-700 text-amber-700 py-3 rounded-lg font-medium hover:bg-amber-50">Save for Later</button>
             </div>
 
-            {/* Actions */}
-            <div className="flex gap-4 mb-6">
-              <button className="flex-1 bg-amber-700 text-white py-3 rounded-lg font-medium hover:bg-amber-800 transition-colors">
-                Add to Cart
-              </button>
-              <button className="flex-1 border-2 border-amber-700 text-amber-700 py-3 rounded-lg font-medium hover:bg-amber-50 transition-colors">
-                Save for Later
-              </button>
-            </div>
-
-            {/* Reviews Section */}
             <div className="border-t border-gray-200 pt-6">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">Customer Reviews</h2>
               <div className="space-y-4">
-                <div className="p-4 bg-gray-50 rounded-lg">
-                  <div className="flex justify-between items-start mb-2">
-                    <p className="font-semibold text-gray-900">Sarah M.</p>
-                    <span className="text-yellow-500">⭐⭐⭐⭐⭐</span>
+                {product.customerReviews.map((review, i) => (
+                  <div key={i} className="p-4 bg-gray-50 rounded-lg">
+                    <div className="flex justify-between items-start mb-2">
+                      <p className="font-semibold text-gray-900">{review.author}</p>
+                      <span className="text-yellow-500">{"⭐".repeat(review.rating)}</span>
+                    </div>
+                    <p className="text-gray-600">{review.text}</p>
+                    <p className="text-xs text-gray-400 mt-2">{review.date}</p>
                   </div>
-                  <p className="text-gray-600">Absolutely beautiful! The craftsmanship is incredible. Highly recommend!</p>
-                </div>
-                <div className="p-4 bg-gray-50 rounded-lg">
-                  <div className="flex justify-between items-start mb-2">
-                    <p className="font-semibold text-gray-900">John D.</p>
-                    <span className="text-yellow-500">⭐⭐⭐⭐</span>
-                  </div>
-                  <p className="text-gray-600">Great product. Arrived quickly and well-packaged. Very happy with my purchase.</p>
-                </div>
+                ))}
               </div>
             </div>
           </div>
         </div>
+
+        {related.length > 0 && (
+          <section className="mt-20">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">You May Also Like</h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {related.map((p) => (
+                <Link key={p.id} href={`/products/${p.id}`}>
+                  <div className="bg-white rounded-lg shadow hover:shadow-lg transition-shadow overflow-hidden">
+                    <div className="aspect-square bg-gradient-to-br from-amber-100 to-orange-100 flex items-center justify-center text-5xl">{p.image}</div>
+                    <div className="p-3">
+                      <h3 className="font-bold text-gray-900 text-sm">{p.name}</h3>
+                      <p className="text-amber-700 font-bold">${p.price}</p>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
       </main>
+      <Footer />
     </div>
   );
 }

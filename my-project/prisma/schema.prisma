@@ -1,0 +1,85 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Seller {
+  id          Int       @id
+  name        String
+  rating      Float
+  products    Int
+  joined      String
+  description String
+  bio         String
+  items       Item[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Item {
+  id          Int     @id @default(autoincrement())
+  name        String
+  price       Float
+  description String?
+  imageUrl    String?
+  sellerId    Int
+  seller      Seller  @relation(fields: [sellerId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([sellerId])
+}
+
+model Product {
+  id               Int       @id @default(autoincrement())
+  name             String
+  price            Float
+  image            String?
+  seller           String
+  sellerId         Int
+  category         String
+  rating           Float
+  reviews          Int
+  stock            Boolean
+  description      String
+  longDescription  String?
+  materials        String[]
+  dimensions       String?
+  careInstructions String?
+  tags             String[]
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+}
+
+model BlogPost {
+  id          Int     @id @default(autoincrement())
+  title       String
+  slug        String  @unique
+  author      String
+  date        String
+  excerpt     String
+  content     String
+  image       String?
+  category    String
+  readTime    Int
+  tags        String[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model FAQ {
+  id        Int     @id @default(autoincrement())
+  question  String
+  answer    String
+  category  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
