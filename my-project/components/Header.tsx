@@ -1,4 +1,5 @@
 import Link from "next/link";
+import CartBadge from "./CartBadge";
 
 interface HeaderProps {
   active?: "home" | "products" | "sellers" | "about" | "contact" | "blog" | "faq" | "collections";
@@ -37,7 +38,8 @@ export default function Header({ active }: HeaderProps) {
               </Link>
             ))}
           </nav>
-          <div className="flex gap-2">
+          <div className="flex gap-4 items-center">
+            <CartBadge />
             <Link href="/auth/signin" className="px-4 py-2 text-gray-700 hover:text-amber-700">
               Sign In
             </Link>

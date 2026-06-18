@@ -2,6 +2,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ReviewsSection from "@/components/ReviewsSection";
+import AddToCartButton from "@/components/AddToCartButton";
 import { getProductById, PRODUCTS } from "@/lib/data";
 
 export default async function ProductDetail({ params }: { params: Promise<{ id: string }> }) {
@@ -69,27 +71,20 @@ export default async function ProductDetail({ params }: { params: Promise<{ id: 
             </Link>
 
             <div className="flex gap-4 mb-8">
-              <button className={`flex-1 py-3 rounded-lg font-medium transition-colors ${product.stock ? "bg-amber-700 text-white hover:bg-amber-800" : "bg-gray-400 text-white cursor-not-allowed"}`}>
-                {product.stock ? "Add to Cart" : "Sold Out"}
-              </button>
+              <div className="flex-1">
+                <AddToCartButton
+                  productId={product.id}
+                  productName={product.name}
+                  price={product.price}
+                  image={product.image}
+                  seller={product.seller}
+                  inStock={product.stock}
+                />
+              </div>
               <button className="flex-1 border-2 border-amber-700 text-amber-700 py-3 rounded-lg font-medium hover:bg-amber-50">Save for Later</button>
             </div>
 
-            <div className="border-t border-gray-200 pt-6">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">Customer Reviews</h2>
-              <div className="space-y-4">
-                {product.customerReviews.map((review, i) => (
-                  <div key={i} className="p-4 bg-gray-50 rounded-lg">
-                    <div className="flex justify-between items-start mb-2">
-                      <p className="font-semibold text-gray-900">{review.author}</p>
-                      <span className="text-yellow-500">{"⭐".repeat(review.rating)}</span>
-                    </div>
-                    <p className="text-gray-600">{review.text}</p>
-                    <p className="text-xs text-gray-400 mt-2">{review.date}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
+            <ReviewsSection productId={product.id} initialReviews={product.customerReviews} />
           </div>
         </div>
 

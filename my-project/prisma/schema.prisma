@@ -56,8 +56,21 @@ model Product {
   dimensions       String?
   careInstructions String?
   tags             String[]
+  productReviews   Review[]
   createdAt        DateTime  @default(now())
   updatedAt        DateTime  @updatedAt
+}
+
+model Review {
+  id        Int       @id @default(autoincrement())
+  productId Int
+  product   Product   @relation(fields: [productId], references: [id], onDelete: Cascade)
+  author    String
+  rating    Int
+  text      String
+  createdAt DateTime  @default(now())
+
+  @@index([productId])
 }
 
 model BlogPost {
