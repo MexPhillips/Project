@@ -28,3 +28,24 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Make typed text in form fields and editable regions orange for visibility */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+input,
+textarea,
+select,
+[contenteditable="true"] {
+  color: #f97316; /* Tailwind orange-500 */
+  caret-color: #f97316;
+}
+
+/* Slightly lighter placeholder color */
+input::placeholder,
+textarea::placeholder {
+  color: #fb923c; /* Tailwind orange-400 */
+  opacity: 1;
+}
+
