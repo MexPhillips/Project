@@ -1,6 +1,6 @@
 import { createHmac, randomBytes, pbkdf2Sync, timingSafeEqual } from "crypto";
 
-const AUTH_COOKIE_NAME = "handcrafted_session";
+export const AUTH_COOKIE_NAME = "handcrafted_session";
 const COOKIE_MAX_AGE = 60 * 60 * 24 * 7; // 7 days
 const AUTH_COOKIE_SECRET = process.env.AUTH_COOKIE_SECRET || "dev_secret_change_me_change_this";
 const PBKDF2_ITERATIONS = 100_000;

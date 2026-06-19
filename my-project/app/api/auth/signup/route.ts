@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "@/lib/db";
 import { hashPassword, createSessionCookie } from "@/lib/auth";
+import { createUser, findUserByEmail } from "@/lib/users";
 
 export async function POST(request: NextRequest) {
   try {
@@ -23,23 +23,24 @@ export async function POST(request: NextRequest) {
     }
 
     const normalizedEmail = String(email).trim().toLowerCase();
-    const existingUser = await prisma.user.findUnique({ where: { email: normalizedEmail } });
+    const existingUser = await findUserByEmail(normalizedEmail);
 
     if (existingUser) {
       return NextResponse.json({ error: "A user with that email already exists." }, { status: 409 });
     }
 
     const passwordHash = hashPassword(String(password));
-    const user = await prisma.user.create({
-      data: {
-        name: String(name).trim(),
-        email: normalizedEmail,
-        passwordHash,
-        accountType: String(accountType || "buyer"),
-      },
+    const user = await createUser({
+      name: String(name).trim(),
+      email: normalizedEmail,
+      passwordHash,
+      accountType: String(accountType || "buyer"),
     });
 
-    const response = NextResponse.json({ success: true, user: { id: user.id, name: user.name, email: user.email } });
+    const response = NextResponse.json({
+      success: true,
+      user: { id: user.id, name: user.name, email: user.email, accountType: user.accountType },
+    });
     response.headers.set("Set-Cookie", createSessionCookie(user.id));
     return response;
   } catch (error) {

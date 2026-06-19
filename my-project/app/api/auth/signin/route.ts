@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "@/lib/db";
 import { verifyPassword, createSessionCookie } from "@/lib/auth";
+import { findUserByEmail } from "@/lib/users";
 
 export async function POST(request: NextRequest) {
   try {
@@ -12,13 +12,16 @@ export async function POST(request: NextRequest) {
     }
 
     const normalizedEmail = String(email).trim().toLowerCase();
-    const user = await prisma.user.findUnique({ where: { email: normalizedEmail } });
+    const user = await findUserByEmail(normalizedEmail);
 
     if (!user || !verifyPassword(String(password), user.passwordHash)) {
       return NextResponse.json({ error: "Invalid email or password." }, { status: 401 });
     }
 
-    const response = NextResponse.json({ success: true, user: { id: user.id, name: user.name, email: user.email } });
+    const response = NextResponse.json({
+      success: true,
+      user: { id: user.id, name: user.name, email: user.email, accountType: user.accountType },
+    });
     response.headers.set("Set-Cookie", createSessionCookie(user.id));
     return response;
   } catch (error) {
